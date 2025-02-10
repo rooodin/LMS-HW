@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      min-height: 100vh;
+      background-color: #f5f5f5;
+    }
+
+    .dashboard-container {
+      display: flex;
+      flex-grow: 1;
+    }
+
+    nav.sidebar {
+      width: 250px;
+      background-color: #333;
+      color: white;
+      padding-top: 20px;
+    }
+
+    nav.sidebar ul {
+      list-style-type: none;
+    }
+
+    nav.sidebar li {
+      padding: 10px;
+    }
+
+    nav.sidebar li a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+    }
+
+    nav.sidebar li a:hover {
+      background-color: #444;
+    }
+
+    main.main-content {
+      flex-grow: 1;
+      padding: 20px;
+    }
+
+    h2 {
+      background: #448eac;
+      margin: 30px;
+      color: #333;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .course-actions button,
+    #create-course,
+    #view-all-courses,
+    #enroll-course {
+      padding: 10px 20px;
+      margin: 10px 0;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .course-actions button:hover {
+      background-color: #45a049;
+    }
+
+    #course-list,
+    #student-list,
+    #profile-details {
+      margin-top: 20px;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    #student-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    #student-list div {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      width: 220px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+  <body>
+    <div class="dashboard-container">
+      <nav class="sidebar">
+        <ul>
+          <li><a href="#dashboard">Dashboard</a></li>
+          <li><a href="#courses">Courses</a></li>
+          <li><a href="#students">Students</a></li>
+        </ul>
+      </nav>
+
+      <main class="main-content">
+        <section id="dashboard">
+          <h2>Welcome to Your Dashboard</h2>
+          <!-- Admin or Instructor or Student Dashboard content will go here -->
+        </section>
+
+        <section id="courses">
+          <h2>Courses</h2>
+          <div class="course-actions">
+            <button id="create-course">Create New Course</button>
+            <button id="view-all-courses">View All Courses</button>
+            <button id="enroll-course">Enroll in a Course</button>
+          </div>
+
+          <div id="course-list"></div>
+        </section>
+
+        <!-- <section id="students">
+          <h2>Students</h2>
+          <div id="student-list">
+       
+          </div>
+        </section> -->
+
+        <!-- <section id="profile">
+          <h2>Your Profile</h2>
+          <div id="profile-details">
+         
+          </div>
+        </section> -->
+      </main>
+    </div>
+
+    <script src="dashboard.js"></script>
+  </body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Task Manger</title>
+
+    <!-- bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="styles.css"
+    >
+    <link
+        rel="stylesheet"
+        href="login.css"
+    >
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Tasks Manger</h1>
+        <nav>
+            <ul>
+                <li id="home"><a href="index.html">Home</a></li>
+                <li id="tasks"><a href="tasks.html">Tasks</a></li>
+                <li id="stats"><a href="state.html">Stats</a></li>
+                <li id="users"><a href="users.html">Users</a></li>
+                <li id="login"><a href="login.html">Login</a></li>
+                <li id="register"><a href="register.html">Register</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Content -->
+    <main>
+        <div class="login">
+            <h1>Register New Account</h1>
+            <form onsubmit="handleRegister(event)">
+                <div class="email">
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder=""
+                        min="8"
+                        max="100"
+                        required
+                    >
+                    <label for="email">Email</label>
+                    <i class="bi bi-person-fill"></i>
+                </div>
+                <div class="email">
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder=""
+                        min="2"
+                        max="200"
+                        required
+                    >
+                    <label for="username">Username</label>
+                    <i class="bi bi-person-fill"></i>
+                </div>
+                <div class="password">
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder=""
+                    >
+                    <label for="password">Password</label>
+                    <i class="bi bi-file-lock-fill"></i>
+                </div>
+                <div class="forget-register">
+                    <a href="login.html">You Already signUp?</a>
+                </div>
+                <button>Register</button>
+                <p id="error-login" class="hide" style="color: red;">User Already Exist</p>
+
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        Copyright for Ronen &copy
+    </footer>
+
+    <script src="register.js"></script>
+</body>
+
+</html>

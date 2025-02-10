@@ -1,0 +1,112 @@
+main {
+    height: 100vh;
+    position: relative;
+}
+
+.login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    width: 70%;
+    padding: 70px;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXHgbwJztNoSNOYHpbN0xw2YbyxBt5EHz8Lg&s');
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+    background-position: right;
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: var(--border-radius);
+}
+
+.login h1{
+    color:rgba(0,0,0,0.3);
+    text-align: left;
+}
+
+.login:hover h1{
+    color: black;
+}
+
+form {
+    width: 45%;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+}
+
+form .email,
+form .password {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+
+form input {
+    width: 100%;
+    border: none;
+    background-color: var(--background-input-color);
+    padding: var(--padding);
+    border-radius: var(--border-radius);
+    font-weight: bolder;
+}
+
+form i{
+    position: absolute;
+    right: 5px;
+}
+
+form label {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.8s ease;
+    color: gray;
+    pointer-events: none;
+}
+
+form input:focus + label,form input:not(:placeholder-shown) + label {
+    top: -10px;
+    font-size: 14px;
+    font-weight: bolder;
+    color: var(--primary-color);
+}
+
+.forget-register{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.forget-register a{
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: bolder;
+}
+
+form button{
+    background-color: var(--button-background-color);
+    border: none;
+    padding: var(--padding);
+    border-radius: var(--border-radius);
+    margin: 0 auto;
+    width: 50%;
+    justify-self: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.8s ease;
+
+}
+
+form button:hover{
+    background-color: green;
+    transform: scale(1.1);
+}
