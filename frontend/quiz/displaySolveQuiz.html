@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Home</title>
+    <link
+        rel="stylesheet"
+        href="../styles.css"
+    >
+    <style>
+        /* display solve quiz */
+
+        #quiz-form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: var(--primary-text-color);
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 15px 0 10px;
+            color: #333;
+        }
+
+
+        .answer-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: var(--padding);
+            border-radius: 5px;
+            margin: 5px 0;
+            cursor: pointer;
+            transition: 0.2s ease-in-out;
+        }
+
+        .answer-option input[type="radio"] {
+            margin-right: 10px;
+            
+        }
+
+        .answer-option:hover {
+            background: var(--button-background-color);
+        }
+
+        .answer-option input:checked+label {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        #submit-quiz-btn {
+            background-color: var(--button-background-color);
+            padding: var(--padding);
+            color: var(--primary-text-color);
+            border: none;
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        #submit-quiz-btn:hover {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Learning Management System</h1>
+        <nav>
+            <ul>
+                <li id="home"><a href="index.html">Home</a></li>
+                <li id="tasks"><a href="tasks.html">Tasks</a></li>
+                <li id="stats"><a href="state.html">Stats</a></li>
+                <li id="users"><a href="users.html">Users</a></li>
+                <li id="login"><a href="login.html">Login</a></li>
+                <li id="register"><a href="register.html">Register</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+
+    <!-- Main -->
+    <main>
+        <h1
+            id="quiz-title"
+            style="margin: 20px 0; text-align: center;"
+        >Quiz Title</h1>
+        <section>
+            <form
+                id="quiz-form"
+                onsubmit="handleSubmitQuiz(event)"
+            >
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+        Copyright &copy
+    </footer>
+
+
+    <script>
+
+        const URL = "http://localhost:3000/api/quizzes/:id/submit";
+        const get_quiz_url = "http://localhost:3000/api/quiz"
+        //widgets
+        const quiz_form = document.getElementById("quiz-form");
+        // const quiz_id = "67aa1d5e00a8e82edbc97907";
+
+        window.addEventListener("load", async () => {
+            const params = new URLSearchParams(window.location.search);
+            const quiz_id = params.get("quiz_id");
+            try {
+                const res = await fetch(`${get_quiz_url}/${quiz_id}`);
+                const data = await res.json();
+                console.log(data);
+                setQuestions(data);
+            } catch (err) {
+                console.log(err);
+            }
+
+        });
+
+        function setQuestions(questions) {
+            document.getElementById("quiz-title").textContent = questions.title;
+            questions.questions.forEach(quiz => {
+                let questionHTML = `<p class="question-title">${quiz.question_title}</p>`;
+
+                quiz.answer_options.forEach((option, index) => {
+                    questionHTML += `
+            <div class="answer-option">
+                <input type="radio" id="option-${quiz._id}-${index}" name="answer-${quiz._id}" value="${index}">
+                <label for="option-${quiz._id}-${index}">${option}</label>
+            </div>
+            `;
+                });
+
+                quiz_form.innerHTML += questionHTML;
+            });
+            quiz_form.innerHTML += `<button id="submit-quiz-btn">Submit Quiz</button>`
+        }
+
+        async function handleSubmitQuiz(e) {
+            e.preventDefault();
+            const user_id = JSON.parse(localStorage.getItem("user"))._id;
+            const formData = new FormData(e.target);
+            const answers = Object.fromEntries(formData);
+
+            try {
+                const res = await fetch(`http://localhost:3000/api/quizzes/${quiz_id}/submit`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({student_id:user_id,answers,}),
+                });
+
+                const result = await res.json();
+                console.log(result);
+
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

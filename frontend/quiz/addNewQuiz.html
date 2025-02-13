@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Home</title>
+    <link
+        rel="stylesheet"
+        href="../styles.css"
+    >
+    <link
+        rel="stylesheet"
+        href="quiz.css"
+    >
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Learning Management System</h1>
+        <nav>
+            <ul>
+                <li id="home"><a href="index.html">Home</a></li>
+                <li id="tasks"><a href="tasks.html">Tasks</a></li>
+                <li id="stats"><a href="state.html">Stats</a></li>
+                <li id="users"><a href="users.html">Users</a></li>
+                <li id="login"><a href="login.html">Login</a></li>
+                <li id="register"><a href="register.html">Register</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+
+    <!-- Main -->
+    <main>
+        <h1 style="margin: 20px 0;">Add New Quiz</h1>
+        <section>
+            <div class="add-new-question">
+                <button onclick="addNewQuestion()">+ Add New Question</button>
+            </div>
+            <form
+                id="form-questions"
+                onsubmit="handleCreateQuiz(event)"
+            >
+                <div class="title">
+                    <label for="title">Quiz Title:</label>
+                    <input
+                        type="text"
+                        id="title"
+                        required
+                    >
+                </div>
+                <div class="quiz">
+                    <div class="question-title">
+                        <label for="question-title">question title:</label>
+                        <input
+                            type="text"
+                            class="question-title-form"
+                            id="question-title"
+                        >
+                    </div>
+                    <div class="options">
+                        <label>Options:</label>
+                        <input
+                            class="question-option-form"
+                            type="text"
+                            required
+                        >
+                        <input
+                            class="question-option-form"
+                            type="text"
+                        >
+                        <input
+                            class="question-option-form"
+                            type="text"
+                        >
+                        <input
+                            class="question-option-form"
+                            type="text"
+                        >
+                    </div>
+                    <div class="correct-option">
+                        <label>Correct Answer:</label>
+                        <input
+                            class="question-corrent-answer-form"
+                            type="number"
+                            min="0"
+                            max="3"
+                            required
+                            placeholder="first option is 0 not 1 - Please Enter number between 0 to 3"
+                        >
+                    </div>
+                </div>
+                <div class="submit-add-quiz-btn">
+                    <button>Add New Quiz</button>
+                </div>
+            </form>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+        Copyright &copy
+    </footer>
+
+
+    <script>
+
+        const URL = "http://localhost:3000/api/quizzes"
+        //widgets
+        const quiz_title = document.getElementById("title");
+        const question_title = document.getElementsByClassName("question-title-form");
+        const options_title = document.getElementsByClassName("question-option-form");
+        const correct_option_number = document.getElementsByClassName("question-corrent-answer-form");
+
+        function addNewQuestion() {
+            document.getElementById("form-questions").innerHTML += `
+                            <div class="quiz">
+                    <div class="question-title">
+                        <label for="question-title">question title:</label>
+                        <input class="question-title-form" type="text" id="question-title">
+                    </div>
+                    <div class="options">
+                        <label>Options:</label>
+                        <input
+                            class="question-option-form"
+                            type="text"
+                            required
+                        >
+                        <input 
+                            class="question-option-form"
+                            type="text">
+                        <input
+                            class="question-option-form"
+                            type="text">
+                        <input
+                            class="question-option-form"
+                            type="text">
+                    </div>
+                    <div class="correct-option">
+                        <input
+                            class="question-corrent-answer-form"
+                            type="number"
+                            min="0"
+                            max="3"
+                            required
+                            placeholder="first option is 0 not 1 - Please Enter number between 0 to 3"
+                        >
+                    </div>
+                </div>
+            `
+        }
+
+        function handleCreateQuiz(e) {
+            e.preventDefault();
+
+            const questions = Array.from(document.getElementsByClassName("quiz")).map(quiz => {
+                return {
+                    question_title: quiz.querySelector(".question-title-form").value,
+                    answer_options: Array.from(quiz.getElementsByClassName("question-option-form")).map(option => option.value),
+                    correct_answer: parseInt(quiz.querySelector(".question-corrent-answer-form").value),
+                }
+            });
+            sendData("65c6b2d6f1a5d4a3b8f9e5c7", questions);
+        }
+
+        async function sendData(course_id, questions) {
+
+            const title = quiz_title.value;
+            try {
+                const res = await fetch(URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ course_id, questions, title }),
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.error || "Login failed");
+                }
+
+                console.log(data);
+                
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

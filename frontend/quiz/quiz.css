@@ -1,0 +1,83 @@
+
+main{
+    text-align: center;
+}
+
+.quiz{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    width: 100%;
+}
+
+input{
+    border-radius: var(--border-radius);
+    border: none;
+    padding: var(--padding);
+    margin: var(--padding);
+    min-width: 50%;
+    width: 450px;
+}
+
+.options{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-new-question,.submit-add-quiz-btn{
+    margin: 40px 0;
+}
+
+.add-new-question button:hover,.submit-add-quiz-btn button:hover{
+
+    transform: scale(1.1);
+    background-color: green;
+}
+
+.add-new-question button,.submit-add-quiz-btn button{
+    border: none;
+    padding: var(--padding);
+    border-radius: var(--border-radius);
+    background-color: var(--button-background-color);
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--primary-text-color);
+    transition: 0.8s all;
+}
+
+.submit-add-quiz-btn{
+    width: 100%;
+}
+
+.submit-add-quiz-btn button{
+    width: 50%;
+}
+
+/* quiz  */
+
+#quizzes{
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+}
+
+#quizzes #a-quiz{
+    text-decoration: none;
+    color: var(--primary-text-color);
+    padding: var(--padding);
+    margin: var(--padding);
+    border-radius: var(--border-radius);
+    width: 70%;
+    background-color: var(--button-background-color);
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+#quizzes #a-quiz:hover{
+    background-color: green;
+}
